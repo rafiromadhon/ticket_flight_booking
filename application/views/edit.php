@@ -97,20 +97,22 @@
 					</div>		
 					<div class="tab-1 resp-tab-content oneway">
 						<!-- Form ini yang dipakai dulu, Okay -->
-						<form action="<?php echo base_url('insert/tambah_aksi'); ?>" method="post">
+						<?php foreach($rute as $r){ ?>
+						<form action="<?php echo base_url('insert/update_rute'); ?>" method="post">
 							<div class="from">
+								<input type="hidden" name="ruteid" value="<?php echo $r->ruteid ?>">
 								<h3>From</h3>
-								<input type="text" name="from" placeholder="Type Departure City" required="true" />
+								<input type="text" name="from" placeholder="Type Departure City" value="<?php echo $r->rute_from ?>" required="true" />
 							</div>
 							<div class="to">
 								<h3>To</h3>
-								<input type="text" name="to" placeholder="Type Destination City" required="true">
+								<input type="text" name="to" placeholder="Type Destination City" value="<?php echo $r->rute_to ?>" required="true">
 							</div>
 							<div class="clear"></div>
 							<div class="date">
 								<div class="depart">
 									<h3>Depart</h3>
-									<input class="date" id="datepicker2" name="depart" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="true">
+									<input class="date" id="datepicker2" name="depart" type="text" value="<?php echo $r->depart_on ?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="true">
 									<span class="checkbox1">
 										<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
 									</span>
@@ -120,6 +122,8 @@
 							<div class="class">
 								<h3>Costs</h3>
 								<select id="w3_country1" name="prices" onchange="change_country(this.value)" class="frm-field required">
+									<option value="<?php echo $r->price ?>"></option>
+
 									<option value="125000">Rp125.000,00</option>  
 									<option value="130000">Rp130.000,00</option>   
 									<option value="225000">Rp225.000,00</option>   
@@ -130,7 +134,7 @@
 							<div class="clear"></div>
 							<input type="submit" value="Search Flights">
 						</form>	
-
+						<?php } ?>
 					</div>
 					<div class="tab-1 resp-tab-content multicity">
 						
