@@ -64,6 +64,10 @@ class Insert extends CI_Controller{
 		redirect('insert/tampil');
 	}
 
+	function login() {
+		$this->load->view('v_login');
+	}
+
 
 }
 

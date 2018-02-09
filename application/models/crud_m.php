@@ -1,7 +1,7 @@
 <?php 
 class crud_m extends CI_Model{
 	function tampil_data(){
-		return $this->db->get('rute');
+		return $this->db->get('rute');// rute adalah nama tabelnya
 	}
 
 	function input_data($data, $table) {
