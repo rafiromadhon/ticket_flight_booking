@@ -3,6 +3,7 @@
 <head>
 	<title>Flight Ticket Booking a Flat Responsive Widget Template :: w3layouts</title>
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/seat.css">
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.min.css">
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -26,40 +27,101 @@
 				<div class="resp-tabs-container">
 					<div class="tab-1 resp-tab-content roundtrip" style="background-color: #ffffff;">
 						<div class="col-lg-7">
-							<form action="<?php echo base_url('booking/insert_customer'); ?>" method="POST">
-								<input name="key" value="<?php echo $_GET['key'] ?>" type="hidden">
-								<?php for ($i = 1; $i <= $data['passengers']; $i++) { ?>
-								<div class="row">
-									<h4>
-										<span></span>Penumpang
-										<?php echo $i ?>
-									</h4>
-								</div>
-								<div class="form-group">
-									<label for="nama">Nama</label>
-									<input class="form-control" type="text" name="name[]">
-								</div>
-								<div class="form-group">
-									<label for="alamat">Alamat</label>
-									<textarea rows="5" class="form-control" name="address[]"></textarea>
-								</div>
-								<div class="form-group">
-									<label for="phone">No. HP</label>
-									<input type="number" class="form-control" name="phone[]">
-								</div>
-								<div class="form-group">
-									<label for="email">Email</label>
-									<input type="email" class="form-control" name="email[]">
-								</div>
-								<div class="form-group">
-									<label for="gender">Kelamin</label>
-									<select class="form-control" name="gender[]">
-										<option value="l">Laki-laki</option>
-										<option value="p">Perempuan</option>
-									</select>
-								</div>
-								<?php } ?>
+							<form action="<?php echo base_url('booking/proccess'); ?>" method="POST">
+								<input type="hidden" name="key" value="<?php echo $_GET['key'] ?>">
+								<table class="customer-table">
+									
+									<?php $i = 0; ?>
+									<?php foreach ($data_form as $value) { ?>
+									<?php $i++; ?>
+
+									<tr>
+										<td>
+											<div onclick="pget(this.id)" id="p<?php echo $i ?>" class="customer-color id-p<?php echo $i ?>"></div>
+										</td>
+										<td>
+											<span>
+												<?php echo $value ?>
+											</span>
+										</td>
+										<td>
+											<input type="text" class="form-control" id="i<?php echo $i ?>" name="seat[]">
+										</td>
+									</tr>
+									<?php } ?>
+								</table>
+
+
+
+
 							</div>
+
+							<div class="seat">
+								<?php for ($i=1; $i <= $seat['seat_total'] ; $i++) : ?>
+
+								<?php if (count($seat['seat_booked_2']) != 0) : ?>
+									<?php if (in_array($i, $seat['seat_booked_2'])) : ?>
+								<div id="<?php echo $i ?>" class="seat-id seat-notavailable">
+									<p><?php echo $i ?></p>
+								</div>
+
+									<?php else : ?>
+								<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
+									<p><?php echo $i ?></p>
+								</div>
+									<?php endif; ?>
+								<?php else : ?>
+								<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
+									<p><?php echo $i ?></p>
+								</div>
+								<?php endif; ?>
+								<?php endfor; ?>
+
+
+							</div>
+
+							<script>
+								function pget(id){
+									seat.p = id;
+									$('.customer-color').removeClass('customer-selected');
+									$('#' + id).addClass('customer-selected');
+								}
+
+								function sget(id){
+									seat.selectSeat(id);
+								}
+
+								var seat = {
+									p: '',
+									pn: function(id){
+										pn = id.replace('p', '');
+										return pn;
+									},
+									selectSeat: function(id) {
+										if ($('#' + id).attr('class') == 'seat-id') {
+
+											if($('#i' + this.pn(this.p)).val() == '') {
+												$('#' + id).addClass('seat-selected');
+												console.log(this.pn(this.p));
+												$('#' + this.pn(this.p)).val(id);
+												$('#' + id).addClass('seat-for-' + this.p);
+											}
+										}
+										else{
+											cSeat = $('#' + id).attr('class');
+											cSeatoc = cSeat.replace('seat-id seat-selected seat-for-p', '');
+											$('#' + id).removeClass('seat-selected');
+											$('#' + id).removeClass(cSeat.replace('seat-id', ''));
+											$('#' + cSeatoc).val('');
+										}
+										console.log($('#' + id).attr('class'));
+									}
+								}
+							</script>
+
+
+
+
 
 							<div class="col-lg-5">
 								<div class="flight-detail">

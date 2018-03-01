@@ -31,261 +31,246 @@
 				<div class="clearfix"> </div>	
 				<div class="resp-tabs-container">
 					<div class="tab-1 resp-tab-content roundtrip">
-						<form action="#" method="post">
+						<form action="<?php echo base_url('searchfull'); ?>" method="GET">
 							<div class="from">
 								<h3>From</h3>
-								<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
+								<select name="from" id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
+									<option value="">Pilih Keberangkatan</option>
+									<?php foreach ($rute_all as $value){ ?>
+									<option value="<?php echo $value['rute_from']; ?>"><?php echo $value['rute_from']; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 							<div class="to">
 								<h3>To</h3>
-								<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
-							</div>
+								<select name="to" id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
+									<option value="">Pilih Pendaratan</option>
+									<?php foreach ($rute_all as $value) : ?>
+										<option value="<?php echo $value['rute_to'] ?>"><?php echo $value['rute_to'] ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>	
 							<div class="clear"></div>
 							<div class="date">
 								<div class="depart">
 									<h3>Depart</h3>
-									<input  id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-									<span class="checkbox1">
-										<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
-									</span>
-								</div>
-								<div class="return">
-									<h3>Return</h3>
-									<input  id="datepicker1" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-									<span class="checkbox1">
-										<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
-									</span>
+									<input  id="datepicker" name="depart_date" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
 								</div>
 								<div class="clear"></div>
 							</div>
 							<div class="class">
 								<h3>Class</h3>
-								<select id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
-									<option value="null">Economy</option>  
-									<option value="null">Premium Economy</option>   
-									<option value="null">Business</option>   
-									<option value="null">First class</option>   						
+								<select name="flight_class" id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
+									<option value="Ekonomi">Ekonomi</option>  
+									<option value="Utama">Utama</option>   						
 								</select>
 							</div>
 							<div class="clear"></div>
-							<div class="numofppl">
-								<div class="adults">
-									<h3>Adult:(12+ yrs)</h3>
-									<div class="quantity"> 
-										<div class="quantity-select">                           
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span>1</span></div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</div>
-								<div class="child">
-									<h3>Child:(2-11 yrs)</h3>
-									<div class="quantity"> 
-										<div class="quantity-select">                           
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value"><span>1</span></div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-							<div class="clear"></div>
-							<input type="submit" value="Search Flights">
-						</form>						
-					</div>		
-					<div class="tab-1 resp-tab-content oneway">
-						<!-- Form ini yang dipakai dulu, Okay -->
-						<form action="<?php echo base_url('insert/tambah_aksi'); ?>" method="post">
-							<div class="from">
-								<h3>From</h3>
-								<input type="text" name="from" placeholder="Type Departure City" required="true" />
-							</div>
-							<div class="to">
-								<h3>To</h3>
-								<input type="text" name="to" placeholder="Type Destination City" required="true">
-							</div>
-							<div class="clear"></div>
-							<div class="date">
-								<div class="depart">
-									<h3>Depart</h3>
-									<input class="date" id="datepicker2" name="depart" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="true">
-									<span class="checkbox1">
-										<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
-									</span>
-								</div>
-								
-							</div>
-							<div class="class">
-								<h3>Costs</h3>
-								<select id="w3_country1" name="prices" onchange="change_country(this.value)" class="frm-field required">
-									<option value="125000">Rp125.000,00</option>  
-									<option value="130000">Rp130.000,00</option>   
-									<option value="225000">Rp225.000,00</option>   
-									<option value="330000">Rp330.000,00</option>   						
-								</select>
-
-							</div>
-							<div class="clear"></div>
-							<input type="submit" value="Search Flights">
-						</form>	
-
-					</div>
-					<div class="tab-1 resp-tab-content multicity">
-						
-						<form action="#" method="post">
-							<div class="from">
-								<h3>From</h3>
-								<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
-							</div>
-							<div class="to">
-								<h3>To</h3>
-								<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
-							</div>
-							<div class="clear"></div>
-							<div class="date">
-								<div class="depart">
-									<h3>Depart</h3>
-									<input class="date" id="datepicker3" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-									<span class="checkbox1">
-										<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
-									</span>
-								</div>
-							</div>
-							<div class="class">
-								<h3>Class</h3>
-								<select id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
-									<option value="null">Economy</option>  
-									<option value="null">Premium Economy</option>   
-									<option value="null">Business</option>   
-									<option value="null">First class</option>   						
+							<div class="adults">
+								<h3>Passanger(s)</h3>
+								<select name="passengers" id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
 								</select>
 							</div>
 							<div class="clear"></div>
-							<div id="loadMore">Add City+</div>
-							<div id="showLess">Remove</div>
-						</form>
-						<div class="load_more">	
-							<ul id="myList">
-								<li>
+							<input name="submit" type="submit" value="Search Flights">
+						</div>
+					</form>						
+				</div>		
+				<div class="tab-1 resp-tab-content oneway">
+					<!-- Form ini yang dipakai dulu, Okay -->
+					<form action="<?php echo base_url('insert/tambah_aksi'); ?>" method="POST">
+						<div class="from">
+							<h3>From</h3>
+							<input type="text" name="from" placeholder="Type Departure City" required="true" />
+						</div>
+						<div class="to">
+							<h3>To</h3>
+							<input type="text" name="to" placeholder="Type Destination City" required="true">
+						</div>
+						<div class="clear"></div>
+						<div class="date">
+							<div class="depart">
+								<h3>Depart</h3>
+								<input class="date" id="datepicker2" name="depart" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="true">
+								<span class="checkbox1">
+									<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
+								</span>
+							</div>
 
-									<div class="l_g spcl">
-										<form action="#" method="post" class="blackbg">
-											<div class="from">
-												<h3>From</h3>
-												<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
-											</div>
-											<div class="to">
-												<h3>To</h3>
-												<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
-											</div>
-											<div class="clear"></div>
-											<div class="date">
-												<div class="depart">
-													<h3>Depart</h3>
-													<input class="date" id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-													<span class="checkbox1">
-														<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
-													</span>
-												</div>
-											</div>
-											<div class="clear"></div>
-										</form>
+						</div>
+						<div class="class">
+							<h3>Costs</h3>
+							<select id="w3_country1" name="prices" onchange="change_country(this.value)" class="frm-field required">
+								<option value="125000">Rp125.000,00</option>  
+								<option value="130000">Rp130.000,00</option>   
+								<option value="225000">Rp225.000,00</option>   
+								<option value="330000">Rp330.000,00</option>   						
+							</select>
 
-									</div>
+						</div>
+						<div class="clear"></div>
+						<input type="submit" value="Search Flights">
+					</form>	
 
-								</li>
-								<form action="#" method="post">
-									<div class="numofppl">
-										<div class="adults">
-											<h3>Adult:(12+ yrs)</h3>
-											<div class="quantity"> 
-												<div class="quantity-select">                           
-													<div class="entry value-minus">&nbsp;</div>
-													<div class="entry value"><span>1</span></div>
-													<div class="entry value-plus active">&nbsp;</div>
-												</div>
-											</div>
+				</div>
+				<div class="tab-1 resp-tab-content multicity">
+
+					<form action="#" method="post">
+						<div class="from">
+							<h3>From</h3>
+							<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
+						</div>
+						<div class="to">
+							<h3>To</h3>
+							<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
+						</div>
+						<div class="clear"></div>
+						<div class="date">
+							<div class="depart">
+								<h3>Depart</h3>
+								<input class="date" id="datepicker3" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+								<span class="checkbox1">
+									<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
+								</span>
+							</div>
+						</div>
+						<div class="class">
+							<h3>Class</h3>
+							<select id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
+								<option value="null">Economy</option>  
+								<option value="null">Premium Economy</option>   
+								<option value="null">Business</option>   
+								<option value="null">First class</option>   						
+							</select>
+						</div>
+						<div class="clear"></div>
+						<div id="loadMore">Add City+</div>
+						<div id="showLess">Remove</div>
+					</form>
+					<div class="load_more">	
+						<ul id="myList">
+							<li>
+
+								<div class="l_g spcl">
+									<form action="#" method="post" class="blackbg">
+										<div class="from">
+											<h3>From</h3>
+											<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
 										</div>
-										<div class="child">
-											<h3>Child:(2-11 yrs)</h3>
-											<div class="quantity"> 
-												<div class="quantity-select">                           
-													<div class="entry value-minus">&nbsp;</div>
-													<div class="entry value"><span>1</span></div>
-													<div class="entry value-plus active">&nbsp;</div>
-												</div>
+										<div class="to">
+											<h3>To</h3>
+											<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
+										</div>
+										<div class="clear"></div>
+										<div class="date">
+											<div class="depart">
+												<h3>Depart</h3>
+												<input class="date" id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+												<span class="checkbox1">
+													<label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Flexible with date</label>
+												</span>
 											</div>
 										</div>
 										<div class="clear"></div>
+									</form>
+
+								</div>
+
+							</li>
+							<form action="#" method="post">
+								<div class="numofppl">
+									<div class="adults">
+										<h3>Adult:(12+ yrs)</h3>
+										<div class="quantity"> 
+											<div class="quantity-select">                           
+												<div class="entry value-minus">&nbsp;</div>
+												<div class="entry value"><span>1</span></div>
+												<div class="entry value-plus active">&nbsp;</div>
+											</div>
+										</div>
+									</div>
+									<div class="child">
+										<h3>Child:(2-11 yrs)</h3>
+										<div class="quantity"> 
+											<div class="quantity-select">                           
+												<div class="entry value-minus">&nbsp;</div>
+												<div class="entry value"><span>1</span></div>
+												<div class="entry value-plus active">&nbsp;</div>
+											</div>
+										</div>
 									</div>
 									<div class="clear"></div>
-									<input type="submit" value="Search Flights">
-								</form>
-							</ul>
-						</div>
+								</div>
+								<div class="clear"></div>
+								<input type="submit" value="Search Flights">
+							</form>
+						</ul>
 					</div>
+				</div>
 
-				</div>						
-			</div>
+			</div>						
 		</div>
 	</div>
-	<div class="footer-w3l">
-		<p class="agileinfo"> &copy; 2016 Flight Ticket Booking . All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-	</div>
-	<!--script for portfolio-->
-	<script src="<?php echo base_url() ?>assets/js/jquery.min.js"> </script>
-	<script src="<?php echo base_url() ?>assets/js/easyResponsiveTabs.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#horizontalTab').easyResponsiveTabs({
+</div>
+<div class="footer-w3l">
+	<p class="agileinfo" style="color: #ffffff;"> &copy; 2018 Flight Ticket Booking . All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+</div>
+<!--script for portfolio-->
+<script src="<?php echo base_url() ?>assets/js/jquery.min.js"> </script>
+<script src="<?php echo base_url() ?>assets/js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#horizontalTab').easyResponsiveTabs({
 					type: 'default', //Types: default, vertical, accordion           
 					width: 'auto', //auto or any width like 600px
 					fit: true   // 100% fit in a container
 				});
-		});		
-	</script>
-	<!--//script for portfolio-->
-	<!-- Calendar -->
-	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery-ui.css" />
-	<script src="<?php echo base_url() ?>assets/js/jquery-ui.js"></script>
-	<script>
-		$(function() {
-			$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-		});
-	</script>
-	<!-- //Calendar -->
-	<!--quantity-->
-	<script>
-		$('.value-plus').on('click', function(){
-			var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-			divUpd.text(newVal);
-		});
+	});		
+</script>
+<!--//script for portfolio-->
+<!-- Calendar -->
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery-ui.css" />
+<script src="<?php echo base_url() ?>assets/js/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+	});
+</script>
+<!-- //Calendar -->
+<!--quantity-->
+<script>
+	$('.value-plus').on('click', function(){
+		var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+		divUpd.text(newVal);
+	});
 
-		$('.value-minus').on('click', function(){
-			var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-			if(newVal>=1) divUpd.text(newVal);
-		});
-	</script>
-	<!--//quantity-->
-	<!--load more-->
-	<script>
-		$(document).ready(function () {
-			size_li = $("#myList li").size();
-			x=1;
+	$('.value-minus').on('click', function(){
+		var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+		if(newVal>=1) divUpd.text(newVal);
+	});
+</script>
+<!--//quantity-->
+<!--load more-->
+<script>
+	$(document).ready(function () {
+		size_li = $("#myList li").size();
+		x=1;
+		$('#myList li:lt('+x+')').show();
+		$('#loadMore').click(function () {
+			x= (x+1 <= size_li) ? x+1 : size_li;
 			$('#myList li:lt('+x+')').show();
-			$('#loadMore').click(function () {
-				x= (x+1 <= size_li) ? x+1 : size_li;
-				$('#myList li:lt('+x+')').show();
-			});
-			$('#showLess').click(function () {
-				x=(x-1<0) ? 1 : x-1;
-				$('#myList li').not(':lt('+x+')').hide();
-			});
 		});
-	</script>
-	<!-- //load-more -->
+		$('#showLess').click(function () {
+			x=(x-1<0) ? 1 : x-1;
+			$('#myList li').not(':lt('+x+')').hide();
+		});
+	});
+</script>
+<!-- //load-more -->
 
 
 
